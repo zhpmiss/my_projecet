@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加页面</title>
+    <style>
+        ul li{list-style: none;margin-top:10px;}
+        label{margin-right: 16px;}
+    </style>
+</head>
+<body>
+    <h1>修改页面</h1>
+
+<form action="/add/" method="post">
+    {% csrf_token %}
+    <ul>
+        <li>
+                <label for="title">标题</label>
+                <input type="text" id="title" name="title" value="" required>
+        </li>
+        <li>
+                <label for="title">作者</label>
+                <input type="text" id="author" name="author" value="" required>
+        </li>
+          <li>
+                <label for="describe">描述</label>
+                <input type="text" id="describe" name="describe" value="" required>
+        </li>
+         <li>
+                <label for="body">详细</label>
+                <textarea id="body" cols="50" rows='10' name="body" required></textarea>
+        </li>
+        <li>
+            <input type="submit" value="提交"/>
+        </li>
+   </ul>
+</form>
+</body>
+</html>

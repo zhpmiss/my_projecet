@@ -1,0 +1,71 @@
+django模型层操作
+    manage.py命令
+	    1.python manage.py makemigrations
+		  #编译变动后模型文件，
+		2.python manage.py migrate
+		  #同步数据库
+		3.python manage.py cratesuperuser
+		  #创建admin的超级用户，用户admin登陆
+一。
+ 1在应用home中的models.py创建表的关系映射
+     #类必须继承models.Model
+    class user(models.Model):
+	    #创建字段，字段名为属性名
+		name=models.CharField(max_length=30,null=True,blank=True)
+		
+		....
+  2.将应用注册到setting中INSTALLED_APPS
+  
+  3.执行上述的2条命令
+        1）.python manage.py makemigrations
+		  #编译变动后模型文件，
+		2）.python manage.py migrate
+  4.使用第三方软件链接数据库查看表结构是否发生变化
+  
+ 二。admin模型层的操作
+   1.将应用中的模型注册到admin中
+      from django.contrib import admin
+		#引入模型文件
+		from .models import article,user
+		# Register your models here.
+		class userAdmin(admin.ModelAdmin):
+			list_display = ('name','age','email','birthday')
+			search_fields = ('name','email')
+			list_filter = ('name','email')
+		#将表article模型注册到后台
+		admin.site.register(article)
+		#将表user模型注册到后台,设置展示的方式
+		admin.site.register(user,userAdmin)
+		
+  2.用过浏览器访问localhost:8000/admin/就是进入后台管理
+    操作绑定好的表，进行(增 删 查 改)
+ 
+ 在命令行操作  python manage.py shell
+  退出：exit()
+ 
+ 1 # 增
+ 2     #
+ 3     # models.Tb1.objects.create(c1='xx', c2='oo')  增加一条数据，可以接受字典类型数据 **kwargs
+ 4 
+ 5     # obj = models.Tb1(c1='xx', c2='oo')
+ 6     # obj.save()
+ 7 
+ 8     # 查
+ 9     #
+10     # models.Tb1.objects.get(id=123)         # 获取单条数据，不存在则报错（不建议）
+11     # models.Tb1.objects.all()               # 获取全部
+12     # models.Tb1.objects.filter(name='seven').first() # 获取指定条件的数据
+13 
+14     # 删
+15     #
+16     # models.Tb1.objects.filter(name='seven').delete() # 删除指定条件的数据
+17 
+18     # 改
+19     # models.Tb1.objects.filter(name='seven').update(gender='0')  # 将指定条件的数据更新，均支持 **kwargs
+20     # obj = models.Tb1.objects.get(id=1)
+21     # obj.c1 = '111'
+22     # obj.save()  
+      
+		
+		
+		

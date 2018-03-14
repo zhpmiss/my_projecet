@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改页面-{{res.title}}</title>
+    <style>
+        ul li{list-style: none;margin-top:10px;}
+        label{margin-right: 16px;}
+    </style>
+</head>
+<body>
+    <h1>修改页面</h1>
+
+<form action="/edit_save/" method="post">
+    {% csrf_token %}
+            <input type="hidden" name="id" value="{{res.id}}"/>
+    <ul>
+        <li>
+                <label for="title">标题</label>
+                <input type="text" id="title" name="title" value="{{res.title}}">
+        </li>
+        <li>
+                <label for="title">作者</label>
+                <input type="text" id="author" name="author" value="{{res.author}}">
+        </li>
+          <li>
+                <label for="describe">描述</label>
+                <input type="text" id="describe" name="describe" value="{{res.describe}}">
+        </li>
+         <li>
+                <label for="body">详细</label>
+                <textarea id="body" cols="50" rows='10' name="body">{{res.body}}</textarea>
+        </li>
+        <li>
+            <input type="submit" value="提交"/>
+        </li>
+   </ul>
+</form>
+</body>
+</html>
